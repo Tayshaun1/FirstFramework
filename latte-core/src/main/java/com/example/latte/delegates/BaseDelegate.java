@@ -42,9 +42,7 @@ public abstract class BaseDelegate extends SwipeBackFragment {
         if (setLayout() instanceof Integer) {
             //这里是返回布局id
             rootView = inflater.inflate((Integer) setLayout(), container, false);
-            Log.e(getClass().getSimpleName(), "==========111");
         } else if (setLayout() instanceof View) {
-            Log.e(getClass().getSimpleName(), "==========222");
             rootView = (View) setLayout();
         }
         if (rootView != null) {

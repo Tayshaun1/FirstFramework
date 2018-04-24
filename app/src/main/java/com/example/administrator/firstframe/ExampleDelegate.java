@@ -2,8 +2,11 @@ package com.example.administrator.firstframe;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.latte.app.Latte;
 import com.example.latte.delegates.LattDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.IError;
@@ -23,30 +26,32 @@ public class ExampleDelegate extends LattDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rooView) {
+        testRestClient();
     }
 
     private void testRestClient() {
         RestClient.build()
-                .url("")
-                .params("", "")
+                .url("http://news.baidu.com/")
+//                .params("", "")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-
+                        Toast.makeText(Latte.getApplicatoinContext(), response, Toast.LENGTH_LONG).show();
                     }
                 })
                 .failure(new IFailure() {
                     @Override
                     public void onFailure() {
-
+                        Log.e(getClass().getSimpleName(), "onFailure");
                     }
                 })
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-
+                        Log.e(getClass().getSimpleName(), "onError:"+msg);
                     }
                 })
-                .build();
+                .build()
+                .get();
     }
 }

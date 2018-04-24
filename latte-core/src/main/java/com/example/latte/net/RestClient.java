@@ -1,5 +1,7 @@
 package com.example.latte.net;
 
+import android.util.Log;
+
 import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
@@ -66,16 +68,16 @@ public class RestClient {
 
         switch (method) {
             case GET:
-                service.get(URL, PARAMS);
+                call=service.get(URL, PARAMS);
                 break;
             case POST:
-                service.post(URL, PARAMS);
+                call=service.post(URL, PARAMS);
                 break;
             case PUT:
-                service.put(URL, PARAMS);
+                call=service.put(URL, PARAMS);
                 break;
             case DELETE:
-                service.delete(URL, PARAMS);
+                call=service.delete(URL, PARAMS);
                 break;
             default:
                 break;
@@ -93,4 +95,17 @@ public class RestClient {
     public final void get(){
         request(HttpMethod.GET);
     }
+
+    public final void post(){
+        request(HttpMethod.POST);
+    }
+
+    public final void put(){
+        request(HttpMethod.PUT);
+    }
+
+    public final void delete(){
+        request(HttpMethod.DELETE);
+    }
+
 }
