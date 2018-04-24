@@ -41,4 +41,16 @@ dependencies {
     //butterknife依赖
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    //网络框架库
+    // retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    // retrofit对应的Gson库
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    //简单的字符串converter
+    compile 'com.squareup.retrofit2:converter-scalars:2.0.2'
+    // okhttp
+    compile 'com.squareup.okhttp3:okhttp:3.10.0'
+    // okio
+    compile 'com.squareup.okio:okio:1.11.0'
 }

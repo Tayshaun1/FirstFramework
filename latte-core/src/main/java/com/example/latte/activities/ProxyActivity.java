@@ -1,7 +1,6 @@
 package com.example.latte.activities;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
 
@@ -17,21 +16,23 @@ import me.yokeyword.fragmentation.SupportActivity;
  * 以后必然会有一个主activity来继承它，所以这里用abstract
  */
 
-public abstract class ProxyActivity extends SupportActivity{
+public abstract class ProxyActivity extends SupportActivity {
 
     /**
      * 用来返回根delegate
+     *
      * @return
      */
     public abstract LattDelegate setRootDelegate();
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
 
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initContainer(savedInstanceState);
     }
 
-    private void initContainer(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState){
+    private void initContainer(@Nullable Bundle savedInstanceState) {
         //一般视图的跟容器都是FrameLayout,这里我就使用ContentFrameLayout
         final ContentFrameLayout container = new ContentFrameLayout(this);
         //这里需要传入一个id，但不能直接传数字，虽然可以运行，还是按规范来写比较好，建一个ids的资源文件
@@ -40,7 +41,7 @@ public abstract class ProxyActivity extends SupportActivity{
         setContentView(container);
         if (savedInstanceState == null) {
             //第一次加载    loadRootFragment这是fragmentation里的SupportActivity独有的方法，不要搞错了
-            loadRootFragment(R.id.delegate_container,setRootDelegate());
+            loadRootFragment(R.id.delegate_container, setRootDelegate());
         }
     }
 
