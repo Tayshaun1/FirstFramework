@@ -8,6 +8,7 @@ import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.Map;
 import java.util.WeakHashMap;
 
@@ -35,6 +36,7 @@ public class RestClientBuild {
     private RequestBody mBody;
     private Context mContext;
     private LoaderStyle mLoaderStyle;
+    private File mFile;
 
     /**
      * 不允许外部的类直接new，只允许同包的RestClient来new
@@ -55,6 +57,16 @@ public class RestClientBuild {
 
     public final RestClientBuild params(String key, Object value) {
         PARAMS.put(key, value);
+        return this;
+    }
+
+    public final RestClientBuild file(File file) {
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuild file(String file) {
+        this.mFile = new File(file);
         return this;
     }
 
@@ -87,7 +99,7 @@ public class RestClientBuild {
         return this;
     }
 
-    public final RestClientBuild loader(LoaderStyle style,Context context) {
+    public final RestClientBuild loader(LoaderStyle style, Context context) {
         this.mLoaderStyle = style;
         this.mContext = context;
         return this;
@@ -100,7 +112,7 @@ public class RestClientBuild {
     }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mContext);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mFile, mContext);
     }
 
 }
