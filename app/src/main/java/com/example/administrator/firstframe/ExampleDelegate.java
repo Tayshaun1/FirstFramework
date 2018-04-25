@@ -4,9 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.latte.app.Latte;
 import com.example.latte.delegates.LattDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.IError;
@@ -32,11 +30,12 @@ public class ExampleDelegate extends LattDelegate {
     private void testRestClient() {
         RestClient.build()
                 .url("http://news.baidu.com/")
+                .loader(getContext())
 //                .params("", "")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-                        Toast.makeText(Latte.getApplicatoinContext(), response, Toast.LENGTH_LONG).show();
+//                        Toast.makeText(Latte.getApplicatoinContext(), response, Toast.LENGTH_LONG).show();
                     }
                 })
                 .failure(new IFailure() {

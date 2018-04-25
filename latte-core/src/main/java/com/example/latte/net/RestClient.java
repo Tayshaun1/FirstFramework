@@ -1,12 +1,14 @@
 package com.example.latte.net;
 
-import android.util.Log;
+import android.content.Context;
 
 import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
 import com.example.latte.net.callback.RequestCallbacks;
+import com.example.latte.ui.LatteLoader;
+import com.example.latte.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -37,9 +39,14 @@ public class RestClient {
     private final IFailure IFAILURE;
     private final IError IERROR;
     private final RequestBody BODY;
+    private final LoaderStyle LOADER_STYLE;
+    /**
+     * 因为dialog需要Context
+     */
+    private final Context CONTEXT;
 
     public RestClient(String url, Map<String, Object> params, IRequest request, ISuccess success, IFailure failure, IError error, RequestBody
-            body) {
+            body, LoaderStyle loaderStyle, Context context) {
         this.URL = url;
         PARAMS.putAll(params);
         this.IREQUEST = request;
@@ -47,6 +54,8 @@ public class RestClient {
         this.IFAILURE = failure;
         this.IERROR = error;
         this.BODY = body;
+        this.LOADER_STYLE = loaderStyle;
+        this.CONTEXT = context;
     }
 
     /**
@@ -66,18 +75,22 @@ public class RestClient {
             IREQUEST.onRequestStart();
         }
 
+        if (LOADER_STYLE != null) {
+            LatteLoader.showLoading(CONTEXT, LOADER_STYLE);
+        }
+
         switch (method) {
             case GET:
-                call=service.get(URL, PARAMS);
+                call = service.get(URL, PARAMS);
                 break;
             case POST:
-                call=service.post(URL, PARAMS);
+                call = service.post(URL, PARAMS);
                 break;
             case PUT:
-                call=service.put(URL, PARAMS);
+                call = service.put(URL, PARAMS);
                 break;
             case DELETE:
-                call=service.delete(URL, PARAMS);
+                call = service.delete(URL, PARAMS);
                 break;
             default:
                 break;
@@ -89,22 +102,22 @@ public class RestClient {
     }
 
     private Callback<String> getResponseCallback() {
-        return new RequestCallbacks(IREQUEST, ISUCCESS, IFAILURE, IERROR);
+        return new RequestCallbacks(IREQUEST, ISUCCESS, IFAILURE, IERROR, LOADER_STYLE);
     }
 
-    public final void get(){
+    public final void get() {
         request(HttpMethod.GET);
     }
 
-    public final void post(){
+    public final void post() {
         request(HttpMethod.POST);
     }
 
-    public final void put(){
+    public final void put() {
         request(HttpMethod.PUT);
     }
 
-    public final void delete(){
+    public final void delete() {
         request(HttpMethod.DELETE);
     }
 

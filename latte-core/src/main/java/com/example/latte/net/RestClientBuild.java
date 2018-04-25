@@ -1,9 +1,12 @@
 package com.example.latte.net;
 
+import android.content.Context;
+
 import com.example.latte.net.callback.IError;
 import com.example.latte.net.callback.IFailure;
 import com.example.latte.net.callback.IRequest;
 import com.example.latte.net.callback.ISuccess;
+import com.example.latte.ui.LoaderStyle;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -30,6 +33,8 @@ public class RestClientBuild {
     private IFailure mIFailure;
     private IError mIError;
     private RequestBody mBody;
+    private Context mContext;
+    private LoaderStyle mLoaderStyle;
 
     /**
      * 不允许外部的类直接new，只允许同包的RestClient来new
@@ -82,8 +87,20 @@ public class RestClientBuild {
         return this;
     }
 
+    public final RestClientBuild loader(LoaderStyle style,Context context) {
+        this.mLoaderStyle = style;
+        this.mContext = context;
+        return this;
+    }
+
+    public final RestClientBuild loader(Context context) {
+        this.mLoaderStyle = LoaderStyle.BallClipRotateIndicator;
+        this.mContext = context;
+        return this;
+    }
+
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mContext);
     }
 
 }
