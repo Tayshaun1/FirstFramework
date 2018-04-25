@@ -45,12 +45,20 @@ public class RestClient {
     private final LoaderStyle LOADER_STYLE;
     private final File FILE;
     /**
+     * download相关参数
+     * DOWNLOAD_DIR:下载后文件存放的位置
+     * EXTENSION：后缀名
+     */
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
+    /**
      * 因为dialog需要Context
      */
     private final Context CONTEXT;
 
     public RestClient(String url, Map<String, Object> params, IRequest request, ISuccess success, IFailure failure, IError error, RequestBody
-            body, LoaderStyle loaderStyle, File file, Context context) {
+            body, LoaderStyle loaderStyle, File file, String downloadDir, String extension, String name, Context context) {
         this.URL = url;
         PARAMS.putAll(params);
         this.IREQUEST = request;
@@ -60,6 +68,9 @@ public class RestClient {
         this.BODY = body;
         this.LOADER_STYLE = loaderStyle;
         this.FILE = file;
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.CONTEXT = context;
     }
 
@@ -106,7 +117,7 @@ public class RestClient {
             case UPLOAD:
 //                call = service.delete(URL, PARAMS);
                 final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
-                final MultipartBody.Part body = MultipartBody.Part.createFormData("file", FILE.getName(),requestBody);
+                final MultipartBody.Part body = MultipartBody.Part.createFormData("file", FILE.getName(), requestBody);
                 call = service.upload(URL, body);
                 break;
             default:

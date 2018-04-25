@@ -34,9 +34,12 @@ public class RestClientBuild {
     private IFailure mIFailure;
     private IError mIError;
     private RequestBody mBody;
-    private Context mContext;
     private LoaderStyle mLoaderStyle;
     private File mFile;
+    private String downloadDir;
+    private String extension;
+    private String name;
+    private Context mContext;
 
     /**
      * 不允许外部的类直接new，只允许同包的RestClient来new
@@ -67,6 +70,21 @@ public class RestClientBuild {
 
     public final RestClientBuild file(String file) {
         this.mFile = new File(file);
+        return this;
+    }
+
+    private final RestClientBuild dir(String dir) {
+        this.downloadDir = dir;
+        return this;
+    }
+
+    private final RestClientBuild extension(String extension) {
+        this.extension = extension;
+        return this;
+    }
+
+    private final RestClientBuild name(String name) {
+        this.name = name;
         return this;
     }
 
@@ -112,7 +130,7 @@ public class RestClientBuild {
     }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mFile, mContext);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mBody, mLoaderStyle, mFile, downloadDir, extension, name, mContext);
     }
 
 }
