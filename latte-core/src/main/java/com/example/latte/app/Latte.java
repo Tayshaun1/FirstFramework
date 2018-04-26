@@ -20,6 +20,10 @@ public final class Latte {
         return Configurator.getInstance().getLatteConfigs();
     }
 
+    public static <T> T getConfiguration(Enum<ConfigKeys> key){
+        return Configurator.getInstance().getConfiguration(key);
+    }
+
     public static Context getApplicationContext(){
         return (Context) getConfigurations().get(ConfigKeys.APPLICATION_CONTEXT.name());
     }

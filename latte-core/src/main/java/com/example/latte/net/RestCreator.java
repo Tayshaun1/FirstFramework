@@ -13,7 +13,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
- *
  * @author Tession
  * @date 2018/4/24
  */
@@ -25,11 +24,11 @@ public class RestCreator {
         public static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
     }
 
-    public static WeakHashMap<String, Object> getParams(){
+    public static WeakHashMap<String, Object> getParams() {
         return ParamsHolder.PARAMS;
     }
 
-    public static RestService getRestService(){
+    public static RestService getRestService() {
         return RestServiceHolder.REST_SERVICE;
     }
 
@@ -50,9 +49,19 @@ public class RestCreator {
      */
     private static final class OKHttpHolder {
         private static final int TIME_OUT = 60;
-        private static final ArrayList<Interceptor> INTERCEPTORS=Latte.get
+        private static final OkHttpClient.Builder BUILDER = new OkHttpClient.Builder();
+        private static final ArrayList<Interceptor> INTERCEPTORS = Latte.getConfiguration(ConfigKeys.INTERCEPTOR);
 
-        private static final OkHttpClient OK_HTTP_CLIENT = new OkHttpClient.Builder()
+        private static OkHttpClient.Builder addInterceptor() {
+            if (INTERCEPTORS != null && !INTERCEPTORS.isEmpty()) {
+                for (Interceptor interceptor : INTERCEPTORS) {
+                    BUILDER.addInterceptor(interceptor);
+                }
+            }
+            return BUILDER;
+        }
+
+        private static final OkHttpClient OK_HTTP_CLIENT = addInterceptor()
                 .connectTimeout(TIME_OUT, TimeUnit.SECONDS)
 //                .addInterceptor()  这个方法会在respose中调用一次
 //                .addNetworkInterceptor()  这个方法会在request和respose方法中各调用一次
