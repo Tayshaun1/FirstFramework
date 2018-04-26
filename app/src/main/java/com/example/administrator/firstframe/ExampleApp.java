@@ -18,6 +18,7 @@ public class ExampleApp extends Application {
                 .withIcon(new FontAwesomeModule())
                 //使用使用自定义的图片
                 .withIcon(new FontEcModule())
+//                .withInterceptor()
                 .withApiHost("http://127.0.0.1/")
                 //.with....
                 .configure();

@@ -5,7 +5,7 @@ package com.example.latte.app;
  * 枚举本身就是单例，并且只能被初始化一次，在多线程中可以使用它来实现惰性单例
  */
 
-public enum ConfigType {
+public enum ConfigKeys {
     /**
      * 网络存储域名的
      */
@@ -21,5 +21,9 @@ public enum ConfigType {
     /**
      *
      */
-    ICON
+    ICON,
+    /**
+     * 拦截器
+     */
+    INTERCEPTOR
 }

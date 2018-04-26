@@ -50,11 +50,67 @@ public class ExampleDelegate extends LattDelegate {
                         Log.e(getClass().getSimpleName(), "onError:" + msg);
                     }
                 })
-//                .dir("")
-//                .extension("")
-//                .name("")
                 .build()
-//                .download();
                 .get();
+    }
+
+    private void testRestClient2() {
+        RestClient.build()
+                .url("http://news.baidu.com/")
+                .loader(getContext())
+//                .params("", "")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+//                        Toast.makeText(Latte.getApplicatoinContext(), response, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .failure(new IFailure() {
+                    @Override
+                    public void onFailure() {
+                        Log.e(getClass().getSimpleName(), "onFailure");
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        Log.e(getClass().getSimpleName(), "onError:" + msg);
+                    }
+                })
+                .dir("")
+                .extension("")
+                .name("")
+                .build()
+                .download();
+    }
+
+    private void testRestClient3() {
+        RestClient.build()
+                .url("http://news.baidu.com/")
+                .loader(getContext())
+//                .params("", "")
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+//                        Toast.makeText(Latte.getApplicatoinContext(), response, Toast.LENGTH_LONG).show();
+                    }
+                })
+                .failure(new IFailure() {
+                    @Override
+                    public void onFailure() {
+                        Log.e(getClass().getSimpleName(), "onFailure");
+                    }
+                })
+                .error(new IError() {
+                    @Override
+                    public void onError(int code, String msg) {
+                        Log.e(getClass().getSimpleName(), "onError:" + msg);
+                    }
+                })
+                .dir("")
+                .extension("")
+                .name("")
+                .build()
+                .download();
     }
 }
