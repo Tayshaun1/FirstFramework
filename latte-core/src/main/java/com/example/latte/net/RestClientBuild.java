@@ -73,17 +73,17 @@ public class RestClientBuild {
         return this;
     }
 
-    private final RestClientBuild dir(String dir) {
+    public final RestClientBuild dir(String dir) {
         this.downloadDir = dir;
         return this;
     }
 
-    private final RestClientBuild extension(String extension) {
+    public final RestClientBuild extension(String extension) {
         this.extension = extension;
         return this;
     }
 
-    private final RestClientBuild name(String name) {
+    public final RestClientBuild name(String name) {
         this.name = name;
         return this;
     }

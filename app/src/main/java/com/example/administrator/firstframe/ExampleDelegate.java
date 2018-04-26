@@ -47,10 +47,14 @@ public class ExampleDelegate extends LattDelegate {
                 .error(new IError() {
                     @Override
                     public void onError(int code, String msg) {
-                        Log.e(getClass().getSimpleName(), "onError:"+msg);
+                        Log.e(getClass().getSimpleName(), "onError:" + msg);
                     }
                 })
+//                .dir("")
+//                .extension("")
+//                .name("")
                 .build()
+//                .download();
                 .get();
     }
 }
