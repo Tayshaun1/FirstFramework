@@ -37,7 +37,7 @@ public class Configurator {
 
     private Configurator() {
         //这时初始化必然没有完成
-        LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), false);
+        LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, false);
     }
 
     final HashMap<Object, Object> getLatteConfigs() {
@@ -49,7 +49,7 @@ public class Configurator {
      */
     public final void configure() {
         initIcons();
-        LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY.name(), true);
+        LATTE_CONFIGS.put(ConfigKeys.CONFIG_READY, true);
     }
 
     private static class Holder {
@@ -57,7 +57,7 @@ public class Configurator {
     }
 
     public final Configurator withApiHost(String host) {
-        LATTE_CONFIGS.put(ConfigKeys.API_HOST.name(), host);
+        LATTE_CONFIGS.put(ConfigKeys.API_HOST, host);
         return this;
     }
 
@@ -102,7 +102,7 @@ public class Configurator {
      * 在我们写类变量或者方法变量时，尽量让他的变量不可变性达到最大化
      */
     private void checkConfiguration() {
-        final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigKeys.CONFIG_READY.name());
+        final boolean isReady = (boolean) LATTE_CONFIGS.get(ConfigKeys.CONFIG_READY);
         if (!isReady) {
             throw new RuntimeException("Configuration is not ready,call configure");
         }

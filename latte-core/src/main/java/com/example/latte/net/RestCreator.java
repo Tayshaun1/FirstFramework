@@ -33,7 +33,7 @@ public class RestCreator {
     }
 
     private static final class RetrofitHolder {
-        private static final String BASE_URL = (String) Latte.getConfigurations().get(ConfigKeys.API_HOST.name());
+        private static final String BASE_URL = (String) Latte.getConfigurations().get(ConfigKeys.API_HOST);
         /**
          * 这时一个android简化的建造者模式
          */

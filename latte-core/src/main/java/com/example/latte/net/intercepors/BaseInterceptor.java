@@ -1,25 +1,17 @@
 package com.example.latte.net.intercepors;
 
-import java.io.IOException;
-import java.nio.channels.Channel;
 import java.util.LinkedHashMap;
 
 import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
-import okhttp3.Response;
-import retrofit2.http.Url;
 
 /**
  * Created by Administrator on 2018/4/26 0026.
  */
 
-public class BaseInterceptor implements Interceptor {
-    @Override
-    public Response intercept(Chain chain) throws IOException {
-        return null;
-    }
+public abstract class BaseInterceptor implements Interceptor {
 
     /**
      * 获取get请求的参数

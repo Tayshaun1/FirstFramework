@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
+import com.example.latte.app.Latte;
 import com.example.latte.delegates.LattDelegate;
 import com.example.latte.net.RestClient;
 import com.example.latte.net.callback.IError;
@@ -24,7 +26,7 @@ public class ExampleDelegate extends LattDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rooView) {
-        testRestClient();
+        testRestClient3();
     }
 
     private void testRestClient() {
@@ -86,13 +88,13 @@ public class ExampleDelegate extends LattDelegate {
 
     private void testRestClient3() {
         RestClient.build()
-                .url("http://news.baidu.com/")
+                .url("http://127.0.0.1/index")
                 .loader(getContext())
 //                .params("", "")
                 .success(new ISuccess() {
                     @Override
                     public void onSuccess(String response) {
-//                        Toast.makeText(Latte.getApplicatoinContext(), response, Toast.LENGTH_LONG).show();
+                        Toast.makeText(Latte.getApplicationContext(), response, Toast.LENGTH_LONG).show();
                     }
                 })
                 .failure(new IFailure() {
